@@ -1,0 +1,21 @@
+# ninja log v5
+4	394	1679648071625447357	CMakeFiles/AdministrareFarmacie.dir/Utils/useful_functions.c.o	60a7f72e547fae10
+3	329	1679646202285627564	CMakeFiles/AdministrareFarmacie.dir/Service/medicament_service.c.o	95f9ef34fd41eef9
+9	303	1679577008072842715	CMakeFiles/AdministrareFarmacie.dir/Repository/medicament_repo.c.o	13bc75828a2171d
+3	259	1679646776893885011	CMakeFiles/AdministrareFarmacie.dir/UI/medicament_ui.c.o	8f6f7b9870c076f3
+3	336	1679577732980464129	CMakeFiles/AdministrareFarmacie.dir/Tests/test_service.c.o	af75dabcb051ee4f
+99	180	1679575999900685350	CMakeFiles/AdministrareFarmacie.dir/Validator/validate.c.o	225fb083621cd2cf
+394	496	1679648071728957424	AdministrareFarmacie	2f6d549ca5eb8e8
+8	294	1679577008060916172	CMakeFiles/AdministrareFarmacie.dir/main.c.o	5cbe6af7d23825d9
+2	276	1679577826552915536	CMakeFiles/AdministrareFarmacie.dir/Domain/medicament.c.o	4bb47de63430069a
+3	337	1679577732980436046	CMakeFiles/AdministrareFarmacie.dir/Tests/test_repo.c.o	f79c44986ced5046
+1	331	1679648107979151629	CMakeFiles/AdministrareFarmacie.dir/Utils/useful_functions.c.o	60a7f72e547fae10
+331	475	1679648108127148542	AdministrareFarmacie	2f6d549ca5eb8e8
+2	359	1679648192755326951	CMakeFiles/AdministrareFarmacie.dir/Utils/useful_functions.c.o	60a7f72e547fae10
+360	452	1679648192850153567	AdministrareFarmacie	2f6d549ca5eb8e8
+1	323	1679648213997085247	CMakeFiles/AdministrareFarmacie.dir/Utils/useful_functions.c.o	60a7f72e547fae10
+324	407	1679648214082420310	AdministrareFarmacie	2f6d549ca5eb8e8
+2	372	1679648267964755671	CMakeFiles/AdministrareFarmacie.dir/Utils/useful_functions.c.o	60a7f72e547fae10
+372	465	1679648268059870653	AdministrareFarmacie	2f6d549ca5eb8e8
+2	336	1679648310150274013	CMakeFiles/AdministrareFarmacie.dir/Utils/useful_functions.c.o	60a7f72e547fae10
+336	477	1679648310294229927	AdministrareFarmacie	2f6d549ca5eb8e8

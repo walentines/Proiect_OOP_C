@@ -6,10 +6,13 @@
 #define ADMINISTRAREFARMACIE_MEDICAMENT_SERVICE_H
 
 #include "../Repository/medicament_repo.h"
+#include "../Undo/undo.h"
 
 struct medicament_service{
+    PtrUndo undo;
     struct medicament_repo* medicamente;
 };
+
 
 void afisare_medicamente_filtrate(struct medicamente_filtrate *m);
 
@@ -32,6 +35,9 @@ void afisare_medicamente_service(struct medicament_service *m);
 struct medicamente_filtrate* medicamente_filtrate_stoc_service(struct medicament_service *m, int threshold);
 
 struct medicamente_filtrate* medicamente_filtrate_litera_service(struct medicament_service *m, char letter);
+
+int undo_service(struct medicament_service *m_service);
+
 
 
 #endif //ADMINISTRAREFARMACIE_MEDICAMENT_SERVICE_H

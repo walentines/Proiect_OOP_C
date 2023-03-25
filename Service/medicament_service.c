@@ -2,17 +2,16 @@
 // Created by Valentin Serban on 08.03.2023.
 //
 
-#include <printf.h>
+#include <stdio.h>
 #include "medicament_service.h"
 #include "../Validator/validate.h"
-#include "../Utils/useful_functions.h"
 /// Functie pentru initializarea service-ului
 /// \return medicamente_service (struct medicament_service*)
 struct medicament_service* initializare_service(){
     struct medicament_repo *medicamente = initializare();
     struct medicament_service* medicamente_service = (struct medicament_service*)malloc(sizeof(struct medicament_service));
     medicamente_service -> medicamente = medicamente;
-
+    medicamente_service -> undo = constructor_undo(medicamente);
     return medicamente_service;
 }
 /// Functie pentru a adauga un medicament in array-ul de medicamente
@@ -20,6 +19,7 @@ struct medicament_service* initializare_service(){
 /// \param m (struct medicament_service*)
 /// \param new_m (struct medicament)
 void adauga_medicament_service(struct medicament_service *m, struct medicament new_m){
+    make_copy_repo(m->undo);
     struct medicament_repo *medicamente = m -> medicamente;
     struct errors* erori = validate_medicament(new_m);
     for(int i = 0; i < erori -> len_err; ++i){
@@ -31,6 +31,7 @@ void adauga_medicament_service(struct medicament_service *m, struct medicament n
         }
         free(erori -> err);
         free(erori);
+        delete_copy_repo(m->undo);
         return;
     }
     for(int i = 0; i < 4; ++i){
@@ -38,6 +39,7 @@ void adauga_medicament_service(struct medicament_service *m, struct medicament n
     }
     free(erori -> err);
     free(erori);
+    apply_copy_repo(m->undo);
     adauga_medicament(medicamente, new_m);
 }
 /// Functie pentru actualizarea numelui si a concentratiei unui medicament
@@ -48,6 +50,7 @@ void adauga_medicament_service(struct medicament_service *m, struct medicament n
 /// \param concentratie (float)
 /// \return Se returneaza functia actualizare_medicament din repo
 int actualizare_medicament_service(struct medicament_service *m, int medicament_id, char nume[], float concentratie){
+    make_copy_repo(m->undo);
     struct medicament_repo *medicamente = m -> medicamente;
     int ok = 0;
     if(!validate_concentratie(concentratie)){
@@ -63,15 +66,22 @@ int actualizare_medicament_service(struct medicament_service *m, int medicament_
         ok = 1;
     }
     if(ok){
+        delete_copy_repo(m->undo);
         return 0;
     }
-    return actualizare_medicament(medicamente, medicament_id, nume, concentratie);
+    ok = actualizare_medicament(medicamente, medicament_id, nume, concentratie);
+    if(ok)
+        apply_copy_repo(m->undo);
+    else
+        delete_copy_repo(m->undo);
+    return ok;
 }
 /// Functie pentru stergerea cantitatii unui medicament.
 /// \param m (struct medicament_service*)
 /// \param medicament_id (int)
 /// \return Se returneaza functia stergere_cantitate din repo
 int stergere_cantitate_service(struct medicament_service *m, int medicament_id){
+    make_copy_repo(m->undo);
     struct medicament_repo *medicamente = m -> medicamente;
     int ok = 0;
     if(!validate_cod_unic(medicament_id)){
@@ -79,14 +89,21 @@ int stergere_cantitate_service(struct medicament_service *m, int medicament_id){
         ok = 1;
     }
     if(ok){
+        delete_copy_repo(m->undo);
         return 0;
     }
-    return stergere_cantitate(medicamente, medicament_id);
+    ok = stergere_cantitate(medicamente, medicament_id);
+    if(ok)
+        apply_copy_repo(m->undo);
+    else
+        delete_copy_repo(m->undo);
+    return ok;
 }
 /// Functie pentru dealocarea memoriei alocate dinamic in functia initializare_service
 /// \param m (struct medicament_service*)
 void destructor_service(struct medicament_service *m){
     destructor(m -> medicamente);
+    destructor_undo(m->undo);
     free(m);
 }
 
@@ -121,4 +138,8 @@ struct medicamente_filtrate* medicamente_filtrate_litera_service(struct medicame
     struct medicamente_filtrate *medicamente_f_l = medicamente_filtrate_litera(medicamente, letter);
 
     return medicamente_f_l;
+}
+
+int undo_service(struct medicament_service *m_service) {
+    return make_undo(m_service->undo);
 }

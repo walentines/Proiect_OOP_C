@@ -4,9 +4,7 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <printf.h>
 #include "medicament_repo.h"
-#include "/Users/valentinserban/OOP/AdministrareFarmacie/Domain/medicament.h"
 /// Functie pentru initializarea repository-ului de medicamente
 /// \return m (struct medicament_repo*)
 struct medicament_repo* initializare(){

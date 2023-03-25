@@ -5,6 +5,8 @@
 #include "medicament_ui.h"
 #include "../Utils/useful_functions.h"
 #include <stdio.h>
+#include <string.h>
+
 
 /// Functie pentru afisarea meniului.
 void afisare_meniu(){
@@ -17,7 +19,8 @@ void afisare_meniu(){
     printf("6.Afisare medicamente descrescator\n");
     printf("7.Filtrare medicamente stoc\n");
     printf("8.Filtrare medicamente litera\n");
-    printf("9.Iesire\n");
+    printf("9. Undo\n");
+    printf("10.Iesire\n");
 }
 
 void afisare_medicamente_tabel_ui(struct medicament_ui *m){
@@ -37,6 +40,7 @@ void afisare_medicamente_consola(struct medicament_ui* m)
 //        return;
 //    }
     int numar_medicamente = m -> medicamente -> medicamente -> numar_medicamente;
+    printf("\n");
     printf("+");
     for(int j=0; j<8; j++)
         printf("-");
@@ -143,6 +147,34 @@ struct medicament_ui* initializare_ui(){
 }
 /// Functie pentru adaugarea unui medicament
 /// \param m (struct medicament_ui*)
+
+void copiere_buffer(char buff[], char dest[])
+/**
+ * functia de copiere si 'strip' al bufferului citit in alt string destinatie
+ * @param buff string - buffer
+ * @param dest string - buff 'strip-uit' - fara caracterele '\n' si ' ' de la final
+ */
+{
+    int j = 0;
+    unsigned long i = strlen(buff) - 1;
+    unsigned long k;
+    int ok = 1;
+    while(i > 0 && ok){
+        if(buff[i] == '\n' || buff[i] == ' '){
+            i--;
+        }
+        else{
+            ok = 0;
+        }
+    }
+    k = i;
+    for(i = 0; i <= k; i++){
+        dest[j] = buff[i];
+        j++;
+    }
+    dest[j] = '\0';
+}
+
 void adauga_medicament_ui(struct medicament_ui *m){
     struct medicament_service *medicamente = m -> medicamente;
     struct medicament new_m;
@@ -152,7 +184,9 @@ void adauga_medicament_ui(struct medicament_ui *m){
     fgets(string, 19, stdin);
     new_m.cod_unic = (int)strtol(string, &ptr, 10);
     printf("Introdu numele medicamentului: ");
-    scanf("%s", new_m.nume_medicament);
+    fgets(string, 20, stdin);
+    copiere_buffer(string, new_m.nume_medicament);
+    //scanf("%s", new_m.nume_medicament);
     printf("Introdu cantitatea disponibila: ");
     fflush(stdin);
     fgets(string, 19, stdin);
@@ -270,6 +304,17 @@ void medicamente_filtrate_litera_ui(struct medicament_ui *m){
     free(medicamente_f_l -> medicamente);
     free(medicamente_f_l);
 }
+
+void undo_medicamente(struct medicament_ui *m) {
+    int cod = undo_service(m->medicamente);
+    if(cod == 2){
+        printf("Nu se mai poate face undo!\n");
+        return;
+    }
+    printf("Undo realizat cu succes!\n");
+}
+
+
 /// Functie pentru rularea aplicatiei
 void run(){
     afisare_meniu();
@@ -307,8 +352,14 @@ void run(){
             case 8:
                 medicamente_filtrate_litera_ui(medicamente);
                 break;
-            default:
+            case 9:
+                undo_medicamente(medicamente);
+                break;
+            case 10:
                 ok = 1;
+                break;
+            default:
+                ok = 0;
                 break;
         }
         if(ok){

@@ -16,7 +16,7 @@ int cmpfunc_cresc(const void* a, const void* b);
 
 int cmpfunc_desc(const void* a, const void* b);
 
-//void afisare_medicament(struct medicament med);
+void afisare_medicament(struct medicament med);
 
 int num_cifre(int x);
 

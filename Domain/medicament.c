@@ -4,6 +4,8 @@
 
 #include "medicament.h"
 #include <string.h>
+#include <stdio.h>
+
 //#include <stdio.h>
 /// Functie de comparare pentru sortare crescatoare
 /// \param a (const void*)
@@ -33,9 +35,9 @@ int cmpfunc_desc(const void* a, const void* b){
 }
 /// Functie pentru afisarea unui medicament
 /// \param med
-//void afisare_medicament(struct medicament med){
-//    printf("COD UNIC: %d\n", med.cod_unic);
-//    printf("NUME MEDICAMENT: %s\n", med.nume_medicament);
-//    printf("CONCENTRATIE: %f\n", med.concentratie);
-//    printf("STOC: %d\n", med.cantitate_disponibila);
-//}
+void afisare_medicament(struct medicament med){
+    printf("COD UNIC: %d\n", med.cod_unic);
+    printf("NUME MEDICAMENT: %s\n", med.nume_medicament);
+    printf("CONCENTRATIE: %f\n", med.concentratie);
+    printf("STOC: %d\n", med.cantitate_disponibila);
+}

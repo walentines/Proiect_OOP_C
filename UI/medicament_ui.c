@@ -19,8 +19,9 @@ void afisare_meniu(){
     printf("6.Afisare medicamente descrescator\n");
     printf("7.Filtrare medicamente stoc\n");
     printf("8.Filtrare medicamente litera\n");
-    printf("9. Undo\n");
-    printf("10.Iesire\n");
+    printf("9.Filtrare medicamente concentratie\n");
+    printf("10.Undo\n");
+    printf("11.Iesire\n");
 }
 
 void afisare_medicamente_tabel_ui(struct medicament_ui *m){
@@ -212,7 +213,9 @@ int actualizare_medicament_ui(struct medicament_ui* m){
     medicament_id = (int)strtol(string, &ptr, 10);
 //    scanf("%d", &medicament_id);
     printf("Introdu numele medicamentului: ");
-    scanf("%s", nume);
+    fgets(string, 19, stdin);
+    copiere_buffer(string, nume);
+    //scanf("%s", nume);
     printf("Introdu concentratia: ");
     fflush(stdin);
     fgets(string, 19, stdin);
@@ -279,7 +282,7 @@ void medicamente_filtrate_stoc_ui(struct medicament_ui *m){
 //        printf("CONCENTRATIE: %f\n", medicamente_f_s -> medicamente[i].concentratie);
 //        printf("STOC: %d\n", medicamente_f_s -> medicamente[i].cantitate_disponibila);
 //    }
-    afisare_medicamente_filtrate(medicamente_f_s);
+    afisare_medicamente_filtrate_tabel(medicamente_f_s);
     free(medicamente_f_s -> medicamente);
     free(medicamente_f_s);
 }
@@ -289,7 +292,8 @@ void medicamente_filtrate_litera_ui(struct medicament_ui *m){
     struct medicament_service *medicamente = m -> medicamente;
     char letter[2];
     printf("Introdu litera: ");
-    scanf("%s", letter);
+    fgets(letter, 2, stdin);
+    //scanf("%s", letter);
     struct medicamente_filtrate *medicamente_f_l = medicamente_filtrate_litera_service(medicamente, letter[0]);
 
 //    for(int i = 0; i < medicamente_f_l -> numar_medicamente; ++i){
@@ -298,12 +302,28 @@ void medicamente_filtrate_litera_ui(struct medicament_ui *m){
 //        printf("CONCENTRATIE: %f\n", medicamente_f_l -> medicamente[i].concentratie);
 //        printf("STOC: %d\n", medicamente_f_l -> medicamente[i].cantitate_disponibila);
 //    }
-    afisare_medicamente_filtrate(medicamente_f_l);
+    afisare_medicamente_filtrate_tabel(medicamente_f_l);
 
 
     free(medicamente_f_l -> medicamente);
     free(medicamente_f_l);
 }
+
+void medicamente_filtrate_concentratie__ui(struct medicament_ui *m) {
+    struct medicament_service *medicamente = m ->medicamente;
+    float concentr;
+    char string[10];
+    printf("Introdu concentratia: ");
+    fgets(string, 9, stdin);
+    concentr = (float)strtod(string, NULL);
+
+    struct medicamente_filtrate *medicamente_f_conc = medicamente_filtrate_concentratie_service(medicamente, concentr);
+    afisare_medicamente_filtrate_tabel(medicamente_f_conc);
+
+    free(medicamente_f_conc -> medicamente);
+    free(medicamente_f_conc);
+}
+
 
 void undo_medicamente(struct medicament_ui *m) {
     int cod = undo_service(m->medicamente);
@@ -353,9 +373,12 @@ void run(){
                 medicamente_filtrate_litera_ui(medicamente);
                 break;
             case 9:
-                undo_medicamente(medicamente);
+                medicamente_filtrate_concentratie__ui(medicamente);
                 break;
             case 10:
+                undo_medicamente(medicamente);
+                break;
+            case 11:
                 ok = 1;
                 break;
             default:

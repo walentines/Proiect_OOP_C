@@ -345,3 +345,88 @@ char *afisare_oferta(struct medicament* med)
     strcat(printare, "|\n");
     return printare;
 }
+
+void afisare_medicamente_filtrate_tabel(struct medicamente_filtrate *m) {
+    printf("\n");
+    printf("+");
+    for(int j=0; j<8; j++)
+        printf("-");
+    printf("+");
+    for(int j=0; j<14; j++)
+        printf("-");
+    printf("+");
+    for(int j=0; j<22; j++)
+        printf("-");
+    printf("+");
+    for(int j=0; j<8; j++)
+        printf("-");
+    printf("+");
+    printf("\n");
+    printf("|");
+    for(int j=0; j<3; j++)
+        printf(" ");
+    printf("ID");
+    for(int j=0; j<3; j++)
+        printf(" ");
+    printf("|");
+    for(int j=0; j<5; j++)
+        printf(" ");
+    printf("NUME");
+    for(int j=0; j<5; j++)
+        printf(" ");
+    printf("|");
+    for(int j=0; j<5; j++)
+        printf(" ");
+    printf("CONCENTRATIE");
+    for(int j=0; j<5; j++)
+        printf(" ");
+    printf("|");
+    for(int j=0; j<2; j++)
+        printf(" ");
+    printf("STOC");
+    for(int j=0; j<2; j++)
+        printf(" ");
+    printf("|");
+    printf("\n");
+    printf("+");
+    for(int j=0; j<8; j++)
+        printf("-");
+    printf("+");
+    for(int j=0; j<14; j++)
+        printf("-");
+    printf("+");
+    for(int j=0; j<22; j++)
+        printf("-");
+    printf("+");
+    for(int j=0; j<8; j++)
+        printf("-");
+    printf("+");
+    printf("\n");
+
+    int numar_medicamente = m->numar_medicamente;
+    for(int i = 0; i<numar_medicamente; i++)
+    {
+        char* afisarea_ofertei;
+        afisarea_ofertei = afisare_oferta(&(m->medicamente[i]));
+        printf("%s", afisarea_ofertei);
+        free(afisarea_ofertei);
+        printf("+");
+        for(int j=0; j<8; j++)
+            printf("-");
+        printf("+");
+        for(int j=0; j<14; j++)
+            printf("-");
+        printf("+");
+        for(int j=0; j<22; j++)
+            printf("-");
+        printf("+");
+        for(int j=0; j<8; j++)
+            printf("-");
+        printf("+");
+//        for(int j=0; j<12; j++)
+//            printf("-");
+//        printf("+");
+        printf("\n");
+    }
+
+}

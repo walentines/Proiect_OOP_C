@@ -36,6 +36,8 @@ struct medicamente_filtrate* medicamente_filtrate_stoc_service(struct medicament
 
 struct medicamente_filtrate* medicamente_filtrate_litera_service(struct medicament_service *m, char letter);
 
+struct medicamente_filtrate* medicamente_filtrate_concentratie_service(struct medicament_service *m, float concentratie);
+
 int undo_service(struct medicament_service *m_service);
 
 

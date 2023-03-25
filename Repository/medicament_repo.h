@@ -38,4 +38,6 @@ struct medicamente_filtrate* medicamente_filtrate_stoc(struct medicament_repo* m
 
 struct medicamente_filtrate* medicamente_filtrate_litera(struct medicament_repo* m, char letter);
 
+struct medicamente_filtrate* medicamente_filtrate_concentratie(struct medicament_repo* m, float concentratie);
+
 #endif //ADMINISTRAREFARMACIE_MEDICAMENT_REPO_H

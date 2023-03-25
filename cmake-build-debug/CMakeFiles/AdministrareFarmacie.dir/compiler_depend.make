@@ -155,7 +155,9 @@ CMakeFiles/AdministrareFarmacie.dir/UI/medicament_ui.c.obj: C:/Users/Andrei/Docu
   C:/Program\ Files/JetBrains/CLion\ 2021.3.4/bin/mingw/x86_64-w64-mingw32/include/corecrt_stdio_config.h \
   C:/Program\ Files/JetBrains/CLion\ 2021.3.4/bin/mingw/x86_64-w64-mingw32/include/_mingw_off_t.h \
   C:/Program\ Files/JetBrains/CLion\ 2021.3.4/bin/mingw/x86_64-w64-mingw32/include/swprintf.inl \
-  C:/Program\ Files/JetBrains/CLion\ 2021.3.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h
+  C:/Program\ Files/JetBrains/CLion\ 2021.3.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
+  C:/Program\ Files/JetBrains/CLion\ 2021.3.4/bin/mingw/x86_64-w64-mingw32/include/string.h \
+  C:/Program\ Files/JetBrains/CLion\ 2021.3.4/bin/mingw/x86_64-w64-mingw32/include/sec_api/string_s.h
 
 CMakeFiles/AdministrareFarmacie.dir/Undo/undo.c.obj: C:/Users/Andrei/Documents/Facultate/Semestrul_II/Programare\ orientata\ obiect/Laboratoare/Lab_Vali/Proiect_OOP_C/Undo/undo.c \
   C:/Users/Andrei/Documents/Facultate/Semestrul_II/Programare\ orientata\ obiect/Laboratoare/Lab_Vali/Proiect_OOP_C/Undo/undo.h \

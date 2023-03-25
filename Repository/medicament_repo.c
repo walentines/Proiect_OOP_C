@@ -125,3 +125,19 @@ struct medicamente_filtrate* medicamente_filtrate_litera(struct medicament_repo*
     return medicamente_filtrate_l;
 }
 
+struct medicamente_filtrate *medicamente_filtrate_concentratie(struct medicament_repo *m, float concentratie) {
+    int num = m ->numar_medicamente;
+    int k = 0;
+    struct medicamente_filtrate *medicamente_filtrate_conc = (struct medicamente_filtrate*) malloc(sizeof(struct medicamente_filtrate));
+    medicamente_filtrate_conc -> medicamente = (struct medicament*) malloc(num * sizeof(struct medicament));
+    medicamente_filtrate_conc -> numar_medicamente = k;
+
+    for(int i = 0; i <num; i++){
+        if(concentratie > m ->medicamente[i].concentratie){
+            medicamente_filtrate_conc -> medicamente[medicamente_filtrate_conc -> numar_medicamente++] = m -> medicamente[i];
+        }
+    }
+    return medicamente_filtrate_conc;
+}
+
+

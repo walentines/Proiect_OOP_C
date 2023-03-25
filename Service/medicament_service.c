@@ -143,3 +143,10 @@ struct medicamente_filtrate* medicamente_filtrate_litera_service(struct medicame
 int undo_service(struct medicament_service *m_service) {
     return make_undo(m_service->undo);
 }
+
+struct medicamente_filtrate * medicamente_filtrate_concentratie_service(struct medicament_service *m, float concentratie) {
+    struct medicament_repo *medicamente = m -> medicamente;
+    struct medicamente_filtrate *medicamente_f_c = medicamente_filtrate_concentratie(medicamente, concentratie);
+
+    return medicamente_f_c;
+}

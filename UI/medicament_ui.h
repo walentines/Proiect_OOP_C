@@ -35,6 +35,8 @@ void medicamente_filtrate_stoc_ui(struct medicament_ui *m);
 
 void medicamente_filtrate_litera_ui(struct medicament_ui *m);
 
+void medicamente_filtrate_concentratie__ui(struct medicament_ui *m);
+
 void undo_medicamente(struct medicament_ui *m);
 
 void run();
